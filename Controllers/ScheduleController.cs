@@ -35,10 +35,12 @@ namespace BandIT.Controllers
 
         [HttpGet("list/{bandId}")]
         [ProducesResponseType(typeof(List<EventDto>), 200)]
-        public async Task<IActionResult> GetBandEventsAsync(int bandId, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetBandEventsAsync(int bandId, [FromQuery] int? year, [FromQuery] int? month, CancellationToken cancellationToken)
         {
             var request = new GetBandEventsRequest()
             {
+                Year = year ?? DateTime.UtcNow.Year,
+                Month = month ?? DateTime.UtcNow.Month,
                 BandId = bandId,
             };
 

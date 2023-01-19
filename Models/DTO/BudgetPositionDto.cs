@@ -10,7 +10,7 @@ namespace BandIT.Models.DTO
         public DateTime Date { get; set; }
         public PositionType PositionType { get; set; }
         public string? Description { get; set; }
-        public DtoNameId? Event { get; set; }
+        public EventDto? Event { get; set; }
 
         public BudgetPositionDto(BudgetPosition entity) : base(entity)
         {
@@ -22,11 +22,7 @@ namespace BandIT.Models.DTO
 
             if(entity.Event is not null)
             {
-                Event = new()
-                {
-                    Id = entity.Event.Id,
-                    Name = entity.Event.Name
-                };
+                Event = new(entity.Event);
             }
         }
     }

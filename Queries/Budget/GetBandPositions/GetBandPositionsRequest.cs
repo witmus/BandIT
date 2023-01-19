@@ -4,8 +4,8 @@ namespace BandIT.Queries.Budget.GetBandPositions
 {
     public class GetBandPositionsRequest : IQuery<List<BudgetPositionDto>>
     {
-        public int Month { get; init; } = DateTime.UtcNow.Month;
-        public int Year { get; init; } = DateTime.UtcNow.Year;
+        public int Month { get; init; }
+        public int Year { get; init; }
         public int BandId { get; init; }
     }
 }

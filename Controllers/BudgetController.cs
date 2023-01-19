@@ -36,12 +36,12 @@ namespace BandIT.Controllers
 
         [HttpGet("list/{bandId}")]
         [ProducesResponseType(typeof(List<BudgetPositionDto>), 200)]
-        public async Task<IActionResult> GetBandPositionsAsync(int bandId, [FromQuery]int year, [FromQuery]int month, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetBandPositionsAsync(int bandId, [FromQuery]int? year, [FromQuery]int? month, CancellationToken cancellationToken)
         {
             var request = new GetBandPositionsRequest()
             {
-                Year = year,
-                Month = month,
+                Year = year ?? DateTime.UtcNow.Year,
+                Month = month ?? DateTime.UtcNow.Month,
                 BandId = bandId,
             };
 
@@ -77,7 +77,7 @@ namespace BandIT.Controllers
                 BandId = bandId,
             };
 
-            return Ok(await _sender.Send(request));
+            return Ok(await _sender.Send(request, cancellationToken));
         }
     }
 }

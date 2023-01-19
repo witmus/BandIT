@@ -11,7 +11,7 @@ namespace BandIT.Models.DTO
         public DateTime Start { get; set; }
         public DateTime? End { get; set; }
 
-        public DtoNameId? Contact { get; set; }
+        public ContactDto? Contact { get; set; }
 
         public EventDto(Event entity) : base(entity)
         {
@@ -23,11 +23,7 @@ namespace BandIT.Models.DTO
 
             if(entity?.Contact is not null)
             {
-                Contact = new DtoNameId()
-                {
-                    Id = entity.Contact.Id,
-                    Name = $"{entity.Contact.FirstName} {entity.Contact?.LastName ?? ""}"
-                };
+                Contact = new ContactDto(entity.Contact);
             }
         }
     }
